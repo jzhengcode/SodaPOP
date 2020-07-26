@@ -2,7 +2,7 @@ module.exports = {
   env: {
     browser: true,
     commonjs: true,
-    es2020: true,
+    es6: true,
   },
   extends: [
     'plugin:react/recommended',
@@ -16,7 +16,10 @@ module.exports = {
   },
   plugins: [
     'react',
+    'jsx-a11y',
+    'import',
   ],
   rules: {
   },
+  ignorePatterns: ['client/dist/*', 'node_modules/*'],
 };
