@@ -14,5 +14,14 @@ const MetricsBox = styled.div`
   justify-content: space-evenly;
 `;
 
+const ModalDisplay = styled.div`
+  background: rgba(0, 0, 0, 0.6);  
+  display: ${(props) => (props.modalOpen ? 'block' : 'none')};
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+`;
 
-export default MetricsBox;
+export { MetricsBox, ModalDisplay };

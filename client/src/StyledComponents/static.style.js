@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 const AddEntryButtonStyle = styled.button`
   height: 60px;
@@ -19,6 +19,34 @@ const DashboardStyle = styled.div`
   height: 800px;
 `;
 
+const modalSlide = keyframes`
+  from {
+    transform: translate(-50%, 0%);
+  }
+  to {
+    transform: translate(-50%, -50%);
+  }
+`;
+
+const ModalWrapper = styled.div`
+  padding: 50px;
+  animation: ${modalSlide} 650ms;
+  background-color: white;
+  border-radius: 8px;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  left: 50%;
+  position: fixed;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 500px;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+`;
+
 const NavigationBarStyle = styled.div`
   width: 100%;
   height: 90px;
@@ -26,8 +54,17 @@ const NavigationBarStyle = styled.div`
   justify-content: center;
   background-color: #80DED0;
 `;
+
+const Submit = styled.button`
+  height: 25px;
+  width: 50px;
+  border-radius: 5%;
+`;
+
 export {
   AddEntryButtonStyle,
   DashboardStyle,
+  ModalWrapper,
   NavigationBarStyle,
+  Submit
 };
