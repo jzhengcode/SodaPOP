@@ -26,8 +26,8 @@ const NavigationBarStyle = styled.div`
   justify-content: center;
   background-color: #80DED0;
 `;
-export { 
+export {
   AddEntryButtonStyle,
-  DashboardStyle, 
-  NavigationBarStyle
+  DashboardStyle,
+  NavigationBarStyle,
 };
