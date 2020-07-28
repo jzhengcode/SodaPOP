@@ -76,5 +76,5 @@ export {
   Exit,
   ModalWrapper,
   NavigationBarStyle,
-  Submit
+  Submit,
 };

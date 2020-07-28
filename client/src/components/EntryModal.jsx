@@ -13,11 +13,11 @@ class EntryModal extends React.Component {
 
     this.state={
       beverage: 'Coke',
-      numberServings: 0,
-      servingSize: '1 can (12 oz)',
+      numberServings: '0',
+      servingSize: '12',
       date: date,
     };
-    
+
     this.handleExit = this.handleExit.bind(this);
     this.handleInsideModalClick = this.handleInsideModalClick.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -72,7 +72,7 @@ class EntryModal extends React.Component {
             <br />
             <label>Number of servings: </label>
             <br />
-            <input type='number' min='0' name='numberServings' value={numberServings} onChange={this.onChange} />
+            <input type='number' min='1' name='numberServings' value={numberServings} onChange={this.onChange} />
             <br />
             <label>Serving Size</label>
             <br />

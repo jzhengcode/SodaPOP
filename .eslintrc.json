@@ -23,5 +23,7 @@
         "react"
     ],
     "rules": {
-    }
+    },
+    "ignorePatterns": ["client/dist/*", "node_modules/*"]
+
 }
