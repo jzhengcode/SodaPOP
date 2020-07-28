@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { defaults, Doughnut } from 'react-chartjs-2';
 import { DashboardStyle } from '../StyledComponents/static.style';
 import { MetricsBox } from '../StyledComponents/prop.style';

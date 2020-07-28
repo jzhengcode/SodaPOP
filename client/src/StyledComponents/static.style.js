@@ -19,6 +19,15 @@ const DashboardStyle = styled.div`
   height: 800px;
 `;
 
+const Exit = styled.div`
+  height: auto;
+  width: 1em;
+  margin-left: auto;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
 const modalSlide = keyframes`
   from {
     transform: translate(-50%, 0%);
@@ -29,7 +38,7 @@ const modalSlide = keyframes`
 `;
 
 const ModalWrapper = styled.div`
-  padding: 50px;
+  padding: 30px;
   animation: ${modalSlide} 650ms;
   background-color: white;
   border-radius: 8px;
@@ -40,8 +49,8 @@ const ModalWrapper = styled.div`
   position: fixed;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 500px;
-  height: 500px;
+  width: 250px;
+  height: 250px;
   flex-direction: column;
   align-content: center;
   justify-content: center;
@@ -57,13 +66,14 @@ const NavigationBarStyle = styled.div`
 
 const Submit = styled.button`
   height: 25px;
-  width: 50px;
+  width: 100px;
   border-radius: 5%;
 `;
 
 export {
   AddEntryButtonStyle,
   DashboardStyle,
+  Exit,
   ModalWrapper,
   NavigationBarStyle,
   Submit
