@@ -49,9 +49,8 @@ app.post('/api/newBeverage', (req, res) => {
     .then(() => {
       res.status(201).send('the query was a success')
     })
-    .catch((err) => {
-      console.log(err);
-      res.send(500)
+    .catch(() => {
+      res.send(500);
     })
 });
 
@@ -88,6 +87,9 @@ app.get('/api/getInfo', (req, res) => {
         weeklySugar,
         weeklyCalorie
       });
+    })
+    .catch(() => {
+      res.send(500);
     })
 })
 

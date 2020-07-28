@@ -12,6 +12,10 @@ const AddEntryButtonStyle = styled.button`
   align-self: center;
 `;
 
+const CalorieText = styled.div`
+  text-align: center;
+`;
+
 const DashboardStyle = styled.div`
   display: flex;
   justify-content: center;
@@ -72,6 +76,7 @@ const Submit = styled.button`
 
 export {
   AddEntryButtonStyle,
+  CalorieText,
   DashboardStyle,
   Exit,
   ModalWrapper,
