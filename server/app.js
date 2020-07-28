@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
+const moment = require('moment');
 const { pool } = require('../database')
 
 const DIST_DIR = path.join(__dirname, '..', 'client', 'dist');
@@ -42,6 +43,52 @@ app.post('/api/newBeverage', (req, res) => {
       $4,
       $5
     )` 
+
+  pool
+    .query(text, values)
+    .then(() => {
+      res.status(201).send('the query was a success')
+    })
+    .catch((err) => {
+      console.log(err);
+      res.send(500)
+    })
 });
+
+app.get('/api/getInfo', (req, res) => {
+  let thisMonth = new Date();
+  thisMonth = thisMonth.getMonth() + 1;
+
+  const text = `SELECT * FROM beverages WHERE EXTRACT(MONTH FROM date) = ${thisMonth}`
+
+  pool
+    .query(text)
+    .then((results) => {
+      const getSum = (total, num, param) => {
+        return total + num[param];
+      }
+
+      let totalSugar = 0;
+      let weeklySugar = 0;
+      let weeklyCalorie = 0;
+      const thisWeek = moment(new Date()).week();
+
+      for (let i = 0; i < results.rows.length; i += 1) {
+        totalSugar = totalSugar + results.rows[i].gramsugar;
+
+        const entryWeek = moment(results.rows[i].date).week();
+        if (entryWeek === thisWeek) {
+          weeklyCalorie = weeklyCalorie + results.rows[i].calorie;
+          weeklySugar = weeklySugar + results.rows[i].gramsugar;
+        }
+      }
+
+      res.status(200).send({
+        totalSugar,
+        weeklySugar,
+        weeklyCalorie
+      });
+    })
+})
 
 module.exports = app;
