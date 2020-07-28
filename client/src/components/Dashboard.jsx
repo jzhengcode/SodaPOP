@@ -1,9 +1,8 @@
 import React from 'react';
-import { GiShinyApple } from 'react-icons/gi';
-import { IconContext } from "react-icons";
+import { GiShinyApple, GiSpoon } from 'react-icons/gi';
 
 import { defaults, Doughnut } from 'react-chartjs-2';
-import { CalorieText, DashboardStyle } from '../StyledComponents/static.style';
+import { CalorieText, DashboardStyle, MetricsText } from '../StyledComponents/static.style';
 import { MetricsBox } from '../StyledComponents/prop.style';
 
 class Dashboard extends React.Component {
@@ -13,12 +12,15 @@ class Dashboard extends React.Component {
 
   render() {
     const { totalSugar, weeklySugar, weeklyCalorie } = this.props;
-    const dailySugarThisWeek = weeklySugar / 7;
+    const dailySugarThisWeek = Math.floor(weeklySugar / 7);
     const dailyCalorieThisWeek = Math.floor(weeklyCalorie / 7);
 
     let data = null;
-    let caloriePercentage = Math.floor(100 * (dailyCalorieThisWeek / 2000))
-    let numberApples = (dailyCalorieThisWeek / 95).toFixed(1);
+    const caloriePercentage = Math.floor(100 * (dailyCalorieThisWeek / 2000))
+    const numberApples = (dailyCalorieThisWeek / 95).toFixed(1);
+    const weeklyCupSugar = weeklySugar / 200;
+    const monthlyCupSugar = totalSugar / 200;
+    
 
     if (dailyCalorieThisWeek >= 2000) {
       data = {
@@ -56,7 +58,18 @@ class Dashboard extends React.Component {
           </CalorieText>
         </MetricsBox>
         <MetricsBox>
-          This is the Metrics Box
+          <CalorieText> <h3>This is how much sugar you've consumed this week </h3>
+            <br />
+            <br />
+            <GiSpoon size='5em' />
+            <h1>{weeklyCupSugar} cups</h1>
+          </CalorieText>
+          <CalorieText> <h3>This is how much sugar you've consumed this month </h3>
+            <br />
+            <br />
+            <GiSpoon size='5em' />
+            <h1>{monthlyCupSugar} cups</h1>
+          </CalorieText>
         </MetricsBox>
       </DashboardStyle>
     )

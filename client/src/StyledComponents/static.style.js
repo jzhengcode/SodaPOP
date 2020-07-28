@@ -16,6 +16,10 @@ const CalorieText = styled.div`
   text-align: center;
 `;
 
+const MetricsText = styled(CalorieText)`
+  font-size: 30px;
+`;
+
 const DashboardStyle = styled.div`
   display: flex;
   justify-content: center;
@@ -79,6 +83,7 @@ export {
   CalorieText,
   DashboardStyle,
   Exit,
+  MetricsText,
   ModalWrapper,
   NavigationBarStyle,
   Submit,

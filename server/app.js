@@ -8,11 +8,12 @@ const DIST_DIR = path.join(__dirname, '..', 'client', 'dist');
 
 const app = express();
 
-app.use(express.static(DIST_DIR));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true,
 }));
+
+app.use(express.static(DIST_DIR));
 
 app.post('/api/newBeverage', (req, res) => {
   const { beverage, numberServings, servingSize, date } = req.body;
@@ -91,6 +92,34 @@ app.get('/api/getInfo', (req, res) => {
     .catch(() => {
       res.send(500);
     })
+})
+
+app.post('/isLoggedIn', (req, res) => {
+  const { username, password } = req.body;
+  console.log(req.body);
+  const text = `SELECT COUNT (*) FROM users WHERE username=$1 AND password=$2`;
+  const values = [username, password];
+
+  pool
+    .query(text, values)
+    .then((results) => {
+      let isSuccess = false;
+
+      if (results.rowCount === 1){
+        isSuccess = true;
+        res.status(200).send({isSuccess});  
+      } else {
+        res.status(500).send({isSuccess})
+      }
+    })
+    .catch((err) => {
+      res.send(500);
+    })
+}) 
+
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../client/dist','index.html'))
 })
 
 module.exports = app;

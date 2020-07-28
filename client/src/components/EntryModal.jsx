@@ -39,7 +39,7 @@ class EntryModal extends React.Component {
   }
 
   onSubmit(event) {
-    axios.post('/api/new', this.state)
+    axios.post('/api/newBeverage', this.state)
       .then((response)=>{
         console.log(response)
       })
