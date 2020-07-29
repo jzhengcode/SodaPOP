@@ -42,10 +42,12 @@ class EntryModal extends React.Component {
     axios.post('/api/newBeverage', this.state)
       .then((response)=>{
         console.log(response)
+        this.handleExit();
       })
       .catch((error) => {
         console.log(error)
       });
+    
     this.handleExit();
     event.preventDefault();
   }

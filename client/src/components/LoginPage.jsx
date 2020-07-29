@@ -1,6 +1,6 @@
 import React from 'react';
-import UserStore from '../stores/UserStore';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 class LoginPage extends React.Component {
   constructor(props) {
@@ -8,6 +8,7 @@ class LoginPage extends React.Component {
     this.state = {
       username: '',
       password: '',
+      loggedIn: false,
     }
 
     this.onChange = this.onChange.bind(this);
@@ -24,38 +25,42 @@ class LoginPage extends React.Component {
     axios.post('/isLoggedIn', this.state)
       .then((results) => {
         if (results.data.isSuccess) {
-          UserStore.isLoggedIn = true;
-          UserStore.username = this.state.username;
-          console.log(UserStore.isLoggedIn)
+          this.setState({loggedIn : true});
         } else {
-          UserStore.isLoggedIn = false;
+          this.setState({loggedIn : false});
+          alert('Incorrect login: Please try again')
         }
       })
       .catch((err) => {
-        console.log(err);
-        UserStore.isLoggedIn = false;
+        this.setState({loggedIn : false});
+        alert('Incorrect login: Please try again')
+        throw new Error(err);
       });
   }
 
   render() {
-    return (
-      <div>
-        <form className='login'>
-          <label>Username: </label>
-          <input name='username' 
-            placeholder='username' 
-            value={this.state.username} 
-            onChange={this.onChange}/>
-          <br />
-          <label>Password: </label>
-          <input name='password' 
-            placeholder='password' 
-            value={this.state.password} 
-            onChange={this.onChange}/>
-        </form>
-        <button onClick={this.onSubmit}> Submit </button>
-      </div>
-    )
+    if (this.state.loggedIn) {
+      return <Redirect to='/dashboard'/>  
+    } else {
+      return (
+        <div>
+          <form className='login'>
+            <label>Username: </label>
+            <input name='username' 
+              placeholder='username' 
+              value={this.state.username} 
+              onChange={this.onChange}/>
+            <br />
+            <label>Password: </label>
+            <input type='password' name='password' 
+              placeholder='password' 
+              value={this.state.password} 
+              onChange={this.onChange}/>
+          </form>
+          <button onClick={this.onSubmit}> Login </button>
+        </div>
+      )
+    }
   }
 }
 

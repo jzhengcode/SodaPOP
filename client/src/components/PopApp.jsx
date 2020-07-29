@@ -7,7 +7,6 @@ import LoginPage from './LoginPage';
 class PopApp extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {}
   }
 
   render() {

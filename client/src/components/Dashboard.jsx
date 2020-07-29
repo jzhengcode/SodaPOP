@@ -18,8 +18,8 @@ class Dashboard extends React.Component {
     let data = null;
     const caloriePercentage = Math.floor(100 * (dailyCalorieThisWeek / 2000))
     const numberApples = (dailyCalorieThisWeek / 95).toFixed(1);
-    const weeklyCupSugar = weeklySugar / 200;
-    const monthlyCupSugar = totalSugar / 200;
+    const weeklyCupSugar = (weeklySugar / 200).toFixed(1);
+    const monthlyCupSugar = (totalSugar / 200).toFixed(1);
     
 
     if (dailyCalorieThisWeek >= 2000) {

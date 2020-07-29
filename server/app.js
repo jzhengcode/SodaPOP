@@ -64,6 +64,7 @@ app.get('/api/getInfo', (req, res) => {
   pool
     .query(text)
     .then((results) => {
+      console.log(results);
       const getSum = (total, num, param) => {
         return total + num[param];
       }
@@ -97,14 +98,13 @@ app.get('/api/getInfo', (req, res) => {
 app.post('/isLoggedIn', (req, res) => {
   const { username, password } = req.body;
   console.log(req.body);
-  const text = `SELECT COUNT (*) FROM users WHERE username=$1 AND password=$2`;
+  const text = `SELECT * FROM users WHERE username=$1 AND password=$2`;
   const values = [username, password];
 
   pool
     .query(text, values)
     .then((results) => {
       let isSuccess = false;
-
       if (results.rowCount === 1){
         isSuccess = true;
         res.status(200).send({isSuccess});  
@@ -113,7 +113,8 @@ app.post('/isLoggedIn', (req, res) => {
       }
     })
     .catch((err) => {
-      res.send(500);
+      console.log(err);
+      res.send(501);
     })
 }) 
 

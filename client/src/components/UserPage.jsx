@@ -21,17 +21,27 @@ class UserPage extends React.Component {
 
     this.handleAddEntry = this.handleAddEntry.bind(this);
     this.handleModalExit = this.handleModalExit.bind(this);
+    this.getInfo = this.getInfo.bind(this);
   }
   
   componentDidMount() {
-    console.log(this.state);
+    this.getInfo();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.modalOpen !== this.state.modalOpen) {
+      this.getInfo();
+    }
+  }
+
+  getInfo() {
     axios.get('/api/getInfo')
-      .then((results) => {
-        this.setState(results.data);
-      })
-      .catch((err) => {
-        throw new Error(err);
-      })
+    .then((results) => {
+      this.setState(results.data);
+    })
+    .catch((err) => {
+      throw new Error(err);
+    })
   }
 
   handleAddEntry() {
@@ -50,7 +60,7 @@ class UserPage extends React.Component {
     const { totalSugar, weeklySugar, weeklyCalorie } = this.state;
     return (
       <div>
-        <EntryModal modalOpen={this.state.modalOpen} handleModalExit={this.handleModalExit}/>
+        <EntryModal modalOpen={this.state.modalOpen} handleModalExit={this.handleModalExit} />
         <NavigationBarStyle>
           <AddEntryButtonStyle onClick={this.handleAddEntry}> + </AddEntryButtonStyle>
         </NavigationBarStyle>
